@@ -2,9 +2,11 @@
 FROM node:22-slim AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm ci
+# Skip the postinstall `nuxt prepare` here: without the sources it would generate
+# .nuxt types with no auto-imports from shared/, and the type check reads those.
+RUN npm ci --ignore-scripts
 COPY . .
-RUN npm run build
+RUN npx nuxt prepare && npm run build
 
 # Run: .output is self-contained, so no node_modules are needed.
 FROM node:22-slim
