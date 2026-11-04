@@ -7,6 +7,15 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: 'build',
   },
+  app: {
+    head: {
+      htmlAttrs: { lang: 'en' },
+    },
+  },
+  routeRules: {
+    // Admin pages depend on the browser-only session: rendered in the browser, not on the server.
+    '/admin/**': { ssr: false },
+  },
   runtimeConfig: {
     public: {
       // Overridden at runtime by NUXT_PUBLIC_API_BASE, which realestate-infrastructure
