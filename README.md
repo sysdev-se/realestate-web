@@ -28,9 +28,14 @@ It defaults to `http://localhost:8080` (realestate-api running locally); overrid
 | `/` | Home (lorem ipsum for now) |
 | `/listings` | All listings: title search, sort, pagination; state in the URL (`?title=&sort=price,desc&page=2`) |
 | `/listings/:id` | One listing: image carousel, details; **Delete** for admins |
-| `/admin/listings/new` | Create a listing (admins only, browser-rendered): upload images, pick the cover |
+| `/admin/listings/new` | Create a listing (admins only, browser-rendered): sale or rent, VND price, beds/baths/area, upload images, pick the cover |
+| `/admin/listings/pending` | Admins: listings the scrapers found, waiting for review (`?page=`) |
+| `/admin/listings/:id` | Admins: one listing in any status, with its source page's full URL; while pending: add/reorder/remove images, **Approve and publish** (saves the images) / **Reject** (the confirmation shows the source URL again), **Delete** |
 
-Header: **Home**, **Listings** for everyone, **Create Listing** for admins; far right **Sign in**,
+Only published listings appear on the public pages. Prices are VND (`5.150.000 ₫`, rentals with
+`/mo`); cards and listing pages also show beds, baths and area when known.
+
+Header: **Home**, **Listings** for everyone, **Create Listing** and **Pending Listings** for admins; far right **Sign in**,
 or the username with **Sign out** to its right. Signing in stores the api's tokens in
 localStorage; the access token is refreshed automatically when it expires.
 

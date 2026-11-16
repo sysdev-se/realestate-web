@@ -33,7 +33,10 @@ export default defineNuxtComponent({
         { label: 'Listings', to: '/listings', icon: 'i-lucide-building-2' },
       ]
       if (this.mounted && this.$auth.isAdmin) {
-        items.push({ label: 'Create Listing', to: '/admin/listings/new', icon: 'i-lucide-plus' })
+        items.push(
+          { label: 'Create Listing', to: '/admin/listings/new', icon: 'i-lucide-plus' },
+          { label: 'Pending Listings', to: '/admin/listings/pending', icon: 'i-lucide-inbox' },
+        )
       }
       return this.icons ? items : items.map(({ icon: _icon, ...item }) => item)
     },

@@ -23,6 +23,33 @@ class ApiClient {
         return $fetch<Listing>(`/api/v1/consumer/listings/${encodeURIComponent(id)}`, { baseURL: this.baseURL })
     }
 
+    // Admins: listings in one status, e.g. the PENDING ones waiting for review. page is 1-based.
+    listAdminListings(publishedStatus: PublishedStatus, page: number): Promise<PagedModel<Listing>> {
+        const query = new URLSearchParams({
+            publishedStatus,
+            sort: 'title,asc',
+            page: String(page - 1),
+            size: String(LISTING_PAGE_SIZE),
+        })
+        return this.admin<PagedModel<Listing>>('GET', `/api/v1/admin/listings?${query}`)
+    }
+
+    // Admins: a listing in any status.
+    getAdminListing(id: string): Promise<Listing> {
+        return this.admin<Listing>('GET', `/api/v1/admin/listings/${encodeURIComponent(id)}`)
+    }
+
+    // Publishes it with these images (the first is the cover); images it had and no longer has
+    // are deleted.
+    publishListing(id: string, imgUrls: string[]): Promise<Listing> {
+        return this.admin<Listing>('POST', `/api/v1/admin/listings/${encodeURIComponent(id)}/publish`, { imgUrls })
+    }
+
+    // Also deletes its images; the listing stays so the scraper won't add it again.
+    rejectListing(id: string): Promise<Listing> {
+        return this.admin<Listing>('POST', `/api/v1/admin/listings/${encodeURIComponent(id)}/reject`)
+    }
+
     uploadImage(file: File): Promise<ImageResponse> {
         const body = new FormData()
         body.append('file', file)

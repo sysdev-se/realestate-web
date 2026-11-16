@@ -37,7 +37,7 @@ export default defineNuxtComponent({
     useHead(() => ({
       title: `${this.listing.title} — Realestate`,
       meta: [
-        { name: 'description', content: this.listing.description?.slice(0, 160) || `${this.listing.title}, ${formatPrice(this.listing.price)}` },
+        { name: 'description', content: this.listing.description?.slice(0, 160) || `${this.listing.title}, ${formatPrice(this.listing)}` },
         { property: 'og:image', content: this.listing.primaryImgUrl ?? undefined },
       ],
     }))

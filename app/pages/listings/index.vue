@@ -21,7 +21,7 @@ export default defineNuxtComponent({
     return {
       title: 'Listings — Realestate',
       meta: [
-        { name: 'description', content: 'Houses and apartments for sale.' },
+        { name: 'description', content: 'Houses and apartments for sale and rent.' },
       ],
     }
   },

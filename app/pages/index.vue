@@ -10,9 +10,9 @@ export default defineNuxtComponent({
   name: 'HomePage',
   head() {
     return {
-      title: 'Realestate — Houses and apartments for sale',
+      title: 'Realestate — Houses and apartments for sale and rent',
       meta: [
-        { name: 'description', content: 'Browse houses and apartments for sale from real estate agencies in one place.' },
+        { name: 'description', content: 'Browse houses and apartments for sale and rent from real estate agencies in one place.' },
       ],
     }
   },
